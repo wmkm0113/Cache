@@ -48,6 +48,11 @@ public final class CacheClientImpl implements CacheClient {
      * <span class="zh-CN">缓存适配器实例</span>
      */
     private final AbstractProvider cacheProvider;
+	/**
+	 * <span class="en-US">Last modified timestamp</span>
+	 * <span class="zh-CN">最后修改时间戳</span>
+	 */
+    private final long lastModified;
 
     /**
      * Constructor for cache agent
@@ -63,6 +68,12 @@ public final class CacheClientImpl implements CacheClient {
                 .map(providerClass -> (AbstractProvider) ObjectUtils.newInstance(providerClass))
                 .orElseThrow(() -> new CacheException(0x000C00000003L));
         this.cacheProvider.initialize(cacheConfig);
+        this.lastModified = cacheConfig.getLastModified();
+    }
+
+    @Override
+    public boolean match(final long lastModified) {
+        return lastModified != Globals.DEFAULT_VALUE_LONG && this.lastModified == lastModified;
     }
 
     /**

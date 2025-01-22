@@ -20,13 +20,13 @@
         <dependency>
             <groupId>org.nervousync</groupId>
             <artifactId>cache-api-jdk11</artifactId>
-            <version>${current.version}</version>
+            <version>1.1.7</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.nervousync</groupId>
             <artifactId>cache-core-jdk11</artifactId>
-            <version>${current.version}</version>
+            <version>1.1.7</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

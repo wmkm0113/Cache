@@ -14,19 +14,19 @@
     <url>https://nervousync.org/projects/cache-jdk11/providers/jedis/index.shtml</url>
     <description>Cache Provider Implements By Jedis, development by Nervousync Studio (NSYC)</description>
     <properties>
-        <jedis.version>5.1.1</jedis.version>
+        <jedis.version>5.2.0</jedis.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.nervousync</groupId>
             <artifactId>cache-api-jdk11</artifactId>
-            <version>${current.version}</version>
+            <version>1.1.7</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.nervousync</groupId>
             <artifactId>cache-core-jdk11</artifactId>
-            <version>${current.version}</version>
+            <version>1.1.7</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -44,7 +44,7 @@
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20231013</version>
+            <version>20250107</version>
         </dependency>
         <dependency>
             <groupId>redis.clients</groupId>

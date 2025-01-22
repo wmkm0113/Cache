@@ -16,6 +16,7 @@
  */
 package org.nervousync.cache.config;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.xml.bind.annotation.*;
 import org.nervousync.annotations.configs.Password;
 import org.nervousync.beans.core.BeanObject;
@@ -48,49 +49,49 @@ public final class CacheConfig extends BeanObject {
 	 * <span class="zh-CN">缓存适配器名称</span>
 	 */
 	@XmlElement(name = "provider_name")
-	private String providerName                    = Globals.DEFAULT_VALUE_STRING;
+	private String providerName = Globals.DEFAULT_VALUE_STRING;
 	/**
 	 * <span class="en-US">Connect timeout</span>
 	 * <span class="zh-CN">连接超时时间</span>
 	 */
 	@XmlElement(name = "connect_timeout")
-	private int connectTimeout						= CacheGlobals.DEFAULT_CONNECTION_TIMEOUT;
+	private int connectTimeout = CacheGlobals.DEFAULT_CONNECTION_TIMEOUT;
 	/**
 	 * <span class="en-US">Connect retry count</span>
 	 * <span class="zh-CN">连接超时重试次数</span>
 	 */
 	@XmlElement(name = "retry_count")
-	private int retryCount                          = CacheGlobals.DEFAULT_RETRY_COUNT;
+	private int retryCount = CacheGlobals.DEFAULT_RETRY_COUNT;
 	/**
 	 * <span class="en-US">Default expire time</span>
 	 * <span class="zh-CN">默认过期时间</span>
 	 */
 	@XmlElement(name = "expire_time")
-	private int expireTime							= CacheGlobals.DEFAULT_EXPIRE_TIME;
+	private int expireTime = CacheGlobals.DEFAULT_EXPIRE_TIME;
 	/**
 	 * <span class="en-US">Client pool size</span>
 	 * <span class="zh-CN">连接池大小</span>
 	 */
 	@XmlElement(name = "client_pool_size")
-	private int clientPoolSize						= CacheGlobals.DEFAULT_CLIENT_POOL_SIZE;
+	private int clientPoolSize = CacheGlobals.DEFAULT_CLIENT_POOL_SIZE;
 	/**
 	 * <span class="en-US">Limit size of generated client instance</span>
 	 * <span class="zh-CN">客户端实例阈值</span>
 	 */
 	@XmlElement(name = "maximum_client")
-	private int maximumClient						= CacheGlobals.DEFAULT_MAXIMUM_CLIENT;
+	private int maximumClient = CacheGlobals.DEFAULT_MAXIMUM_CLIENT;
 	/**
 	 * <span class="en-US">Cluster mode</span>
 	 * <span class="zh-CN">集群模式</span>
 	 */
 	@XmlElement(name = "cluster_mode")
-	private String clusterMode						= ClusterMode.Singleton.toString();
+	private String clusterMode = ClusterMode.Singleton.toString();
 	/**
 	 * <span class="en-US">Master name</span>
 	 * <span class="zh-CN">主服务器名称</span>
 	 */
 	@XmlElement(name = "master_name")
-	private String masterName						= Globals.DEFAULT_VALUE_STRING;
+	private String masterName = Globals.DEFAULT_VALUE_STRING;
 	/**
 	 * <span class="en-US">Authenticate username</span>
 	 * <span class="zh-CN">用于身份验证的用户名</span>
@@ -111,6 +112,12 @@ public final class CacheConfig extends BeanObject {
 	@XmlElementWrapper(name = "server_config_list")
 	@XmlElement(name = "server_config")
 	private List<ServerConfig> serverConfigList;
+	/**
+	 * <span class="en-US">Last modified timestamp</span>
+	 * <span class="zh-CN">最后修改时间戳</span>
+	 */
+	@XmlElement(name = "last_modified")
+	private long lastModified = Globals.DEFAULT_VALUE_LONG;
 
 	/**
 	 * <h3 class="en-US">Constructor for Cache config.</h3>
@@ -124,8 +131,8 @@ public final class CacheConfig extends BeanObject {
 	 * <h3 class="en-US">Retrieve cache provider name</h3>
 	 * <h3 class="zh-CN">读取缓存适配器名称</h3>
 	 *
-	 * @return 	<span class="en-US">Cache provider name</span>
-	 * 			<span class="zh-CN">缓存适配器名称</span>
+	 * @return <span class="en-US">Cache provider name</span>
+	 * <span class="zh-CN">缓存适配器名称</span>
 	 */
 	public String getProviderName() {
 		return providerName;
@@ -146,8 +153,8 @@ public final class CacheConfig extends BeanObject {
 	 * <h3 class="en-US">Retrieve cache server authorization username</h3>
 	 * <h3 class="zh-CN">获取缓存服务器的用户名</h3>
 	 *
-	 * @return 	<span class="en-US">Cache server username</span>
-	 * 			<span class="zh-CN">缓存服务器用户名</span>
+	 * @return <span class="en-US">Cache server username</span>
+	 * <span class="zh-CN">缓存服务器用户名</span>
 	 */
 	public String getUserName() {
 		return userName;
@@ -168,8 +175,8 @@ public final class CacheConfig extends BeanObject {
 	 * <h3 class="en-US">Retrieve cache server authorization password</h3>
 	 * <h3 class="zh-CN">获取缓存服务器的密码</h3>
 	 *
-	 * @return 	<span class="en-US">Cache server password</span>
-	 * 			<span class="zh-CN">缓存服务器密码</span>
+	 * @return <span class="en-US">Cache server password</span>
+	 * <span class="zh-CN">缓存服务器密码</span>
 	 */
 	public String getPassWord() {
 		return passWord;
@@ -211,8 +218,8 @@ public final class CacheConfig extends BeanObject {
 	 * <h3 class="en-US">Retrieve server connect timeout</h3>
 	 * <h3 class="zh-CN">读取缓存服务器的连接超时时间</h3>
 	 *
-	 * @return 	<span class="en-US">Connect timeout</span>
-	 * 			<span class="zh-CN">连接超时时间</span>
+	 * @return <span class="en-US">Connect timeout</span>
+	 * <span class="zh-CN">连接超时时间</span>
 	 */
 	public int getConnectTimeout() {
 		return connectTimeout;
@@ -233,8 +240,8 @@ public final class CacheConfig extends BeanObject {
 	 * <h3 class="en-US">Retrieve server connect retry count</h3>
 	 * <h3 class="zh-CN">读取缓存服务器的连接超时重试次数</h3>
 	 *
-	 * @return 	<span class="en-US">Connect retry count</span>
-	 * 			<span class="zh-CN">连接超时重试次数</span>
+	 * @return <span class="en-US">Connect retry count</span>
+	 * <span class="zh-CN">连接超时重试次数</span>
 	 */
 	public int getRetryCount() {
 		return retryCount;
@@ -255,8 +262,8 @@ public final class CacheConfig extends BeanObject {
 	 * <h3 class="en-US">Retrieve default expire time</h3>
 	 * <h3 class="zh-CN">读取缓存的默认过期时间</h3>
 	 *
-	 * @return 	<span class="en-US">Default expire time</span>
-	 * 			<span class="zh-CN">默认过期时间</span>
+	 * @return <span class="en-US">Default expire time</span>
+	 * <span class="zh-CN">默认过期时间</span>
 	 */
 	public int getExpireTime() {
 		return expireTime;
@@ -277,8 +284,8 @@ public final class CacheConfig extends BeanObject {
 	 * <h3 class="en-US">Retrieve connect client pool size</h3>
 	 * <h3 class="zh-CN">读取客户端连接池的大小</h3>
 	 *
-	 * @return 	<span class="en-US">Client pool size</span>
-	 * 			<span class="zh-CN">连接池大小</span>
+	 * @return <span class="en-US">Client pool size</span>
+	 * <span class="zh-CN">连接池大小</span>
 	 */
 	public int getClientPoolSize() {
 		return clientPoolSize;
@@ -299,8 +306,8 @@ public final class CacheConfig extends BeanObject {
 	 * <h3 class="en-US">Retrieve limit size of generated client instance</h3>
 	 * <h3 class="zh-CN">读取允许创建的客户端实例阈值</h3>
 	 *
-	 * @return 	<span class="en-US">Limit size of generated client instance</span>
-	 * 			<span class="zh-CN">客户端实例阈值</span>
+	 * @return <span class="en-US">Limit size of generated client instance</span>
+	 * <span class="zh-CN">客户端实例阈值</span>
 	 */
 	public int getMaximumClient() {
 		return maximumClient;
@@ -321,8 +328,8 @@ public final class CacheConfig extends BeanObject {
 	 * <h3 class="en-US">Retrieve cluster mode</h3>
 	 * <h3 class="zh-CN">读取集群类型</h3>
 	 *
-	 * @return 	<span class="en-US">Cluster mode</span>
-	 * 			<span class="zh-CN">集群类型</span>
+	 * @return <span class="en-US">Cluster mode</span>
+	 * <span class="zh-CN">集群类型</span>
 	 */
 	public String getClusterMode() {
 		return clusterMode;
@@ -344,8 +351,8 @@ public final class CacheConfig extends BeanObject {
 	 * <h3 class="en-US">Retrieve cluster master name</h3>
 	 * <h3 class="zh-CN">读取集群主服务器名称</h3>
 	 *
-	 * @return 	<span class="en-US">Master name</span>
-	 * 			<span class="zh-CN">主服务器名称</span>
+	 * @return <span class="en-US">Master name</span>
+	 * <span class="zh-CN">主服务器名称</span>
 	 */
 	public String getMasterName() {
 		return masterName;
@@ -360,6 +367,28 @@ public final class CacheConfig extends BeanObject {
 	 */
 	public void setMasterName(final String masterName) {
 		this.masterName = masterName;
+	}
+
+	/**
+	 * <h3 class="en-US">Getter method for the last modified timestamp</h3>
+	 * <h3 class="zh-CN">最后修改时间戳的Getter方法</h3>
+	 *
+	 * @return <span class="en-US">Last modified timestamp</span>
+	 * <span class="zh-CN">最后修改时间戳</span>
+	 */
+	public long getLastModified() {
+		return this.lastModified;
+	}
+
+	/**
+	 * <h3 class="en-US">Setter method for the last modified timestamp</h3>
+	 * <h3 class="zh-CN">最后修改时间戳的Setter方法</h3>
+	 *
+	 * @param lastModified <span class="en-US">Last modified timestamp</span>
+	 *                     <span class="zh-CN">最后修改时间戳</span>
+	 */
+	public void setLastModified(final long lastModified) {
+		this.lastModified = lastModified;
 	}
 
 	/**
@@ -397,6 +426,12 @@ public final class CacheConfig extends BeanObject {
 		 */
 		@XmlElement(name = "server_weight")
 		private int serverWeight;
+		/**
+		 * <span class="en-US">Last modified timestamp</span>
+		 * <span class="zh-CN">最后修改时间戳</span>
+		 */
+		@JsonIgnore
+		private long lastModified = Globals.DEFAULT_VALUE_LONG;
 
 		/**
 		 * <h3 class="en-US">Default constructor</h3>
@@ -416,9 +451,8 @@ public final class CacheConfig extends BeanObject {
 		 *                      <span class="zh-CN">缓存服务器地址</span>
 		 * @param serverPort    <span class="en-US">Cache server port</span>
 		 *                      <span class="zh-CN">缓存服务器端口号</span>
-		 *
-		 * @return 	<span class="en-US">Match result</span>
-		 * 			<span class="en-US">比对结果</span>
+		 * @return <span class="en-US">Match result</span>
+		 * <span class="en-US">比对结果</span>
 		 */
 		public boolean match(final String serverAddress, final int serverPort) {
 			return (this.serverAddress.equalsIgnoreCase(serverAddress) && this.serverPort == serverPort);
@@ -429,11 +463,10 @@ public final class CacheConfig extends BeanObject {
 		 * <h3 class="zh-CN">比对指定的服务器配置信息是否与当前配置信息一致</h3>
 		 * Match boolean.
 		 *
-		 * @param serverConfig 	<span class="en-US">Cache server configure information</span>
-		 *                     	<span class="zh-CN">缓存服务器配置信息</span>
-		 *
-		 * @return 	<span class="en-US">Match result</span>
-		 * 			<span class="en-US">比对结果</span>
+		 * @param serverConfig <span class="en-US">Cache server configure information</span>
+		 *                     <span class="zh-CN">缓存服务器配置信息</span>
+		 * @return <span class="en-US">Match result</span>
+		 * <span class="en-US">比对结果</span>
 		 */
 		public boolean match(final ServerConfig serverConfig) {
 			if (serverConfig == null) {
@@ -447,8 +480,8 @@ public final class CacheConfig extends BeanObject {
 		 * <h3 class="en-US">Retrieve cache server address</h3>
 		 * <h3 class="zh-CN">读取缓存服务器地址</h3>
 		 *
-		 * @return 	<span class="en-US">Cache server address</span>
-		 * 			<span class="zh-CN">缓存服务器地址</span>
+		 * @return <span class="en-US">Cache server address</span>
+		 * <span class="zh-CN">缓存服务器地址</span>
 		 */
 		public String getServerAddress() {
 			return serverAddress;
@@ -469,8 +502,8 @@ public final class CacheConfig extends BeanObject {
 		 * <h3 class="en-US">Retrieve cache server port</h3>
 		 * <h3 class="zh-CN">读取缓存服务器端口号</h3>
 		 *
-		 * @return 	<span class="en-US">Cache server port</span>
-		 * 			<span class="zh-CN">缓存服务器端口号</span>
+		 * @return <span class="en-US">Cache server port</span>
+		 * <span class="zh-CN">缓存服务器端口号</span>
 		 */
 		public int getServerPort() {
 			return serverPort;
@@ -491,8 +524,8 @@ public final class CacheConfig extends BeanObject {
 		 * <h3 class="en-US">Retrieve cache server weight</h3>
 		 * <h3 class="zh-CN">获取缓存服务器权重值</h3>
 		 *
-		 * @return 	<span class="en-US">Cache server weight</span>
-		 * 			<span class="zh-CN">缓存服务器权重值</span>
+		 * @return <span class="en-US">Cache server weight</span>
+		 * <span class="zh-CN">缓存服务器权重值</span>
 		 */
 		public int getServerWeight() {
 			return serverWeight;
@@ -507,6 +540,28 @@ public final class CacheConfig extends BeanObject {
 		 */
 		public void setServerWeight(final int serverWeight) {
 			this.serverWeight = serverWeight;
+		}
+
+		/**
+		 * <h3 class="en-US">Getter method for the last modified timestamp</h3>
+		 * <h3 class="zh-CN">最后修改时间戳的Getter方法</h3>
+		 *
+		 * @return <span class="en-US">Last modified timestamp</span>
+		 * <span class="zh-CN">最后修改时间戳</span>
+		 */
+		public long getLastModified() {
+			return this.lastModified;
+		}
+
+		/**
+		 * <h3 class="en-US">Setter method for the last modified timestamp</h3>
+		 * <h3 class="zh-CN">最后修改时间戳的Setter方法</h3>
+		 *
+		 * @param lastModified <span class="en-US">Last modified timestamp</span>
+		 *                     <span class="zh-CN">最后修改时间戳</span>
+		 */
+		public void setLastModified(final long lastModified) {
+			this.lastModified = lastModified;
 		}
 	}
 }

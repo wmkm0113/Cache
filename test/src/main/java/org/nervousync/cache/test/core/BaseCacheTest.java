@@ -36,7 +36,6 @@ public abstract class BaseCacheTest {
     @BeforeAll
     public static void initialize() throws CacheException {
         ConfigureManager.initialize();
-        CacheUtils.initialize();
     }
 
     @AfterAll
@@ -63,7 +62,7 @@ public abstract class BaseCacheTest {
             this.logger.info("No_Auth_File");
             return;
         }
-        boolean generateResult = CacheConfigBuilder.newBuilder("TestCache")
+        CacheConfig cacheConfig = CacheConfigBuilder.newBuilder()
                 .providerName(this.providerName)
                 .connectTimeout(CacheGlobals.DEFAULT_CONNECTION_TIMEOUT)
                 .expireTime(5)
@@ -74,20 +73,18 @@ public abstract class BaseCacheTest {
                 .serverWeight(PROPERTIES.containsKey("ServerWeight")
                         ? Integer.parseInt(PROPERTIES.getProperty("ServerWeight"))
                         : Globals.DEFAULT_VALUE_INT)
-                .confirm()
+                .confirmParent(CacheConfigBuilder.class)
                 .authorization(PROPERTIES.getProperty("UserName"), PROPERTIES.getProperty("PassWord"))
                 .confirm();
-        if (!generateResult) {
+        if (cacheConfig == null) {
             return;
         }
-        CacheConfig cacheConfig = ConfigureManager.getInstance().readConfigure(CacheConfig.class, "TestCache");
         Assertions.assertNotNull(cacheConfig);
         this.logger.info("Generated_Configure", cacheConfig.toXML(Boolean.TRUE));
 
-        CacheUtils cacheUtils = CacheUtils.getInstance();
-        this.logger.info("Register_Result", cacheUtils.register("TestCache", cacheConfig));
-        this.logger.info("Register_Check", "TestCache", cacheUtils.registered("TestCache"));
-        Optional.ofNullable(cacheUtils.client("TestCache"))
+        this.logger.info("Register_Result", CacheUtils.register("TestCache", cacheConfig));
+        this.logger.info("Register_Check", "TestCache", CacheUtils.registered("TestCache"));
+        Optional.ofNullable(CacheUtils.client("TestCache"))
                 .ifPresent(client -> {
                     client.add("test", "Test add");
                     this.logger.info("Read_Debug", "test", client.get("test"));

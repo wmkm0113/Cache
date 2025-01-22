@@ -16,6 +16,8 @@
  */
 package org.nervousync.cache.api;
 
+import org.nervousync.commons.Globals;
+
 /**
  * <h2 class="en-US">Cache client interface</h2>
  * <h2 class="zh-CN">缓存客户端接口</h2>
@@ -30,6 +32,17 @@ public interface CacheClient {
 	 * <span class="zh-CN">默认缓存有效时间</span>
 	 */
 	int DEFAULT_EXPIRE_TIME = -1;
+
+	/**
+	 * <h3 class="en-US">Checks whether the given modification time is consistent with the current modification time</h3>
+	 * <h3 class="zh-CN">检查给定的修改时间与当前的修改时间是否一致</h3>
+	 *
+	 * @param lastModified <span class="en-US">Last modified timestamp</span>
+	 *                     <span class="zh-CN">最后修改时间戳</span>
+	 * @return <span class="en-US">Check result</span>
+	 * <span class="zh-CN">检查结果</span>
+	 */
+	boolean match(final long lastModified);
 
 	/**
 	 * <h3 class="en-US">Set key-value to cache server, using default expire time</h3>

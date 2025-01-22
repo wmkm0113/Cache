@@ -17,8 +17,9 @@
 @XmlSchema(namespace = "https://nervousync.org/schemas/cache", elementFormDefault = XmlNsForm.QUALIFIED,
         location = "https://nervousync.org/schemas/cache_config_1.0.xsd",
         xmlns = {
-            	@XmlNs(prefix = "cache", namespaceURI = "https://nervousync.org/schemas/cache"),
-				@XmlNs(prefix = "secure", namespaceURI = "https://nervousync.org/schemas/secure")
+                @XmlNs(prefix = "xs", namespaceURI = "http://www.w3.org/2001/XMLSchema"),
+                @XmlNs(prefix = "xsi", namespaceURI = "http://www.w3.org/2001/XMLSchema-instance"),
+            	@XmlNs(prefix = "cache", namespaceURI = "https://nervousync.org/schemas/cache")
         })
 package org.nervousync.cache.config;
 

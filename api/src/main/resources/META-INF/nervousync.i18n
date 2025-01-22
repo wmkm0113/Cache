@@ -35,6 +35,10 @@
         {
           "key": "Stack_Message_Error",
           "content": "Error stack message:"
+        },
+        {
+          "key": "Register_Default_Failed",
+          "content": "Register default cache failed! "
         }
       ]
     },
@@ -61,6 +65,10 @@
         {
           "key": "Stack_Message_Error",
           "content": "错误堆栈信息："
+        },
+        {
+          "key": "Register_Default_Failed",
+          "content": "注册系统缓存失败！"
         }
       ]
     }
