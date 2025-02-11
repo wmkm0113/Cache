@@ -16,8 +16,6 @@
  */
 package org.nervousync.cache.api;
 
-import org.nervousync.commons.Globals;
-
 /**
  * <h2 class="en-US">Cache client interface</h2>
  * <h2 class="zh-CN">缓存客户端接口</h2>

@@ -16,7 +16,7 @@
     <description>Cache Provider Implements By Redisson, development by Nervousync Studio (NSYC)</description>
     <properties>
         <netty.version>4.1.117.Final</netty.version>
-        <redisson.version>3.43.0</redisson.version>
+        <redisson.version>3.44.0</redisson.version>
     </properties>
     <dependencies>
         <dependency>

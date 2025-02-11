@@ -1,4 +1,15 @@
 Nervousync Cache Utils
+[02/11/2025]
+[Fix] Fix provider annotation property name invalid error
+[Add] Cache provider implement using Redisson
+[Add] Add Security policy
+[Add] Add cache configure file XML schema define file
+[Update] Update the Junit version to 5.11.4
+[Update] Update the jedis version to 5.2.0
+[Update] Update the netty version to 4.1.117.Final
+[Update] Update the lettuce version to 6.5.3.RELEASE
+[Update] Update the redisson version to 3.44.0
+
 [02/27/2024]
 [Update] Update Jedis version to 5.1.1
 [Update] Update Lettuce version to 6.3.1.RELEASE

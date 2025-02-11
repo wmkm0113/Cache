@@ -71,20 +71,7 @@ public final class CacheUtils {
 	 * <span class="zh-CN">缓存工具类的单例实例</span>
 	 */
 	public static CacheUtils getInstance() {
-		if (CacheUtils.INSTANCE == null) {
-			synchronized (CacheUtils.class) {
-				try {
-					CacheManager cacheManager = ServiceLoader.load(CacheManager.class)
-							.findFirst()
-							.orElseThrow(() -> new CacheException(0x000C00000001L));
-					INSTANCE = new CacheUtils(cacheManager);
-				} catch (CacheException e) {
-					if (LOGGER.isDebugEnabled()) {
-						LOGGER.debug("Stack_Message_Error", e);
-					}
-				}
-			}
-		}
+		initialize();
 		return CacheUtils.INSTANCE;
 	}
 
@@ -103,6 +90,7 @@ public final class CacheUtils {
 	 * <span class="zh-CN">注册结果，成功返回Boolean.TRUE，失败返回Boolean.FALSE</span>
 	 */
 	public static boolean register(final String cacheName) {
+		initialize();
 		if (StringUtils.isEmpty(cacheName) || INSTANCE == null) {
 			return Boolean.FALSE;
 		}
@@ -121,6 +109,7 @@ public final class CacheUtils {
 	 * <span class="zh-CN">注册结果，成功返回Boolean.TRUE，失败返回Boolean.FALSE</span>
 	 */
 	public static boolean register(final String cacheName, final CacheConfig cacheConfig) {
+		initialize();
 		if (INSTANCE == null || StringUtils.isEmpty(cacheName)
 				|| ObjectUtils.nullSafeEquals(CacheGlobals.DEFAULT_CACHE_NAME, cacheName)) {
 			return Boolean.FALSE;
@@ -139,6 +128,7 @@ public final class CacheUtils {
 	 *                  <span class="zh-CN">缓存识别名称</span>
 	 */
 	public static boolean registered(final String cacheName) {
+		initialize();
 		if (INSTANCE == null || StringUtils.isEmpty(cacheName)) {
 			return Boolean.FALSE;
 		}
@@ -158,6 +148,7 @@ public final class CacheUtils {
 	 * <span class="zh-CN">缓存客户端实例，如果给定的缓存识别名称未找到，则返回null</span>
 	 */
 	public static CacheClient client(final String cacheName) {
+		initialize();
 		if (INSTANCE == null || StringUtils.isEmpty(cacheName)) {
 			return null;
 		}
@@ -172,6 +163,7 @@ public final class CacheUtils {
 	 *                  <span class="zh-CN">缓存识别名称</span>
 	 */
 	public static void deregister(final String cacheName) {
+		initialize();
 		if (CacheUtils.INSTANCE == null) {
 			return;
 		}
@@ -210,5 +202,22 @@ public final class CacheUtils {
 		return Optional.ofNullable(this.configureManager.readConfigure(CacheConfig.class, cacheName))
 				.map(cacheConfig -> INSTANCE.cacheManager.register(cacheName, cacheConfig))
 				.orElse(Boolean.FALSE);
+	}
+
+	private static void initialize() {
+		if (CacheUtils.INSTANCE == null) {
+			synchronized (CacheUtils.class) {
+				try {
+					CacheManager cacheManager = ServiceLoader.load(CacheManager.class)
+							.findFirst()
+							.orElseThrow(() -> new CacheException(0x000C00000001L));
+					INSTANCE = new CacheUtils(cacheManager);
+				} catch (CacheException e) {
+					if (LOGGER.isDebugEnabled()) {
+						LOGGER.debug("Stack_Message_Error", e);
+					}
+				}
+			}
+		}
 	}
 }
